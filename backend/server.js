@@ -12,9 +12,10 @@ const app = express();
 app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.listen(process.env.PORT, () => {
-  console.log("server is running at: ");
+  console.log("server is running at: " + process.env.PORT);
 });
 
 //connect mongoose
@@ -25,3 +26,5 @@ mongoose.connect(process.env.MONGODB, () => {
 // Routes
 app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);
+
+// JWT
