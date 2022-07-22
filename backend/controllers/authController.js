@@ -21,7 +21,7 @@ const authController = {
       const user = await newUser.save();
       return res.status(200).json(user);
     } catch (error) {
-      res.status(500).json(error);
+      return res.status(500).json(error);
     }
   },
 
@@ -85,7 +85,7 @@ const authController = {
     const refreshToken = await req.cookies.refreshToken;
     if (!refreshToken) return res.status(401).json("you're not authenticated");
     if (!refreshTokens.includes(refreshToken)) {
-      res.status(403).json("Refresh token is not valid");
+      return res.status(403).json("Refresh token is not valid");
     }
     jwt.verify(refreshToken, process.env.REFRESH_TOKEN_KEY, (err, user) => {
       if (err) {
